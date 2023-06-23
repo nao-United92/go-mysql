@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <style>
+    label {
+      width: 200px;
+      float:left;
+      margin: 0 50px 25px 0;
+    }
+    p {
+      margin-bottom: 5px;
+    }
+    input {
+      height: 20px;
+      margin-bottom: 10px;
+    }
+    tr {
+      width: 50%;
+    }
+    th,td{
+      border:1px #333 solid;
+    }
+    table{
+      margin-top: 5px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #tdSample {
+      margin-left: 5px;
+    }
+    button {
+      width: 75px;
+      height: 30px;
+      color: #FFF;
+      background-color: #3CB371;
+      border: 0;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+  <h2>ユーザー一覧</h2>
+  <form method="post" action="/new" style="margin: 10px 50px 10px 50px;">
+    <div style="width: 100%;">
+      <label>
+        <p>氏名</p>
+        <input type="text" name="name" size="30" placeholder="入力してください">
+      </label>
+      <label>
+        <p>所属部署</p>
+        <input type="text" name="department" size="30" placeholder="入力してください">
+      </label>
+      <label>
+        <p>メールアドレス</p>
+        <input type="text" name="email" size="30" placeholder="入力してください">
+      </label>
+      <label>
+        <p>電話番号</p>
+        <input type="text" name="phone" size="30" placeholder="入力してください">
+      </label>
+      <div style="padding-top: 43px;">
+        <button type="submit">登録</button>
+      </div>
+    </div>
+  </form>
+
+
+    <table style="width: 90%;margin: 10px 50px 10px 50px;">
+      <tr>
+        <th style="width: 50px;"></th>
+        <th>氏名</th>
+        <th>所属部署</th>
+        <th>メールアドレス</th>
+        <th>電話番号</th>
+      </tr>
+      {{ range .users }}
+        <tr>
+          <td>
+            <form method="post" action="/delete/{{.ID}}">
+              <div align="center">
+                <button type="submit">削除</button>
+              </div>
+            </form>
+          </td>
+          <td><div id="tdSample">{{ .Name }}</div></td>
+          <td><div id="tdSample">{{ .Department }}</div></td>
+          <td><div id="tdSample">{{ .Email }}</div></td>
+          <td><div id="tdSample">{{ .Phone }}</div></td>
+        </tr>
+      {{ end }}
+    </table>
+</body>
+</html>
